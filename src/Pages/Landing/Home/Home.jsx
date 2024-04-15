@@ -1,9 +1,16 @@
+import Banner from "./Banner/Banner";
+import About from "./about/About";
+import Services from "./service/Services";
+import Testimonial from "./testimonial/Testimonial";
 
 
 const Home = () => {
     return (
-        <div>
-            <h2 className="text-2xl text-green-800 "> Smile Savvy Care</h2>
+        <div className="max-w-5xl mx-auto">
+            <Banner></Banner>
+            <Services></Services>
+            <About></About>
+            <Testimonial></Testimonial>
         </div>
     );
 };
