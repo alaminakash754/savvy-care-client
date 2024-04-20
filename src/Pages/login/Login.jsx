@@ -54,10 +54,16 @@ const Login = () => {
             </Helmet> */}
             <div className="relative">
 
-                <img className="md:w-[1000px] md:h-[600px] md:ml-[100px]" src="https://i.ibb.co/XZxNFTb/computer-security-with-login-password-padlock.jpg" alt="" />
-                <div className="items-center mx-auto absolute top-[70px] md:right-[400px] opacity-80 bg-yellow-100">
+                <img className="md:w-[1000px] md:h-[600px] md:ml-[100px]" src="https://i.ibb.co/XZxNFTb/computer-security-with-login-password-padlock.jpg" alt="" data-aos="fade-right"
+                data-aos-offset="300"
+                data-aos-easing="ease-in-sine" 
+                data-aos-duration="2000" />
+                <div className="items-center mx-auto absolute top-[70px] md:right-[400px] opacity-80 bg-blue-100" data-aos="fade-left"
+                data-aos-offset="300"
+                data-aos-easing="ease-in-sine" 
+                data-aos-duration="2000">
                     <div className="card shrink-0 md:w-[500px] max-w-sm shadow-2xl ">
-                        <h2 className="italic text-4xl font-bold text-yellow-800 text-center mt-2">Login Here !</h2>
+                        <h2 className="italic text-4xl font-bold text-blue-800 text-center mt-2">Login Here !</h2>
                         <form onSubmit={handleLogin} className="card-body">
                             <div className="form-control">
                                 <label className="label">

@@ -6,7 +6,8 @@ const DoctorCard = ({doctor}) => {
     return (
         <div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 my-10 mx-20">
-                <div>
+                <div data-aos="zoom-in"
+                data-aos-duration="1000">
                     <img className="rounded-t-md rounded-r-md border-4 border-gray-300 p-4 w-[500px] h-[350px]" src={image} alt="" />
                 </div>
                 <div className="space-y-4 mt-5">

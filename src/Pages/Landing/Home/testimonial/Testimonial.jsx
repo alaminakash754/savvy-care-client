@@ -10,7 +10,10 @@ import SectionTitle from '../../../../components/sectionTitle/SectionTitle';
 
 const Testimonial = () => {
     return (
-        <div className='mt-16 mb-5 '>
+        <div className='mt-16 mb-5 ' data-aos="fade-left"
+        data-aos-offset="300"
+        data-aos-easing="ease-in-sine" 
+        data-aos-duration="2000">
             <SectionTitle subHeading='Testimonial' heading='What Patient Says'></SectionTitle>
             <Swiper
                 slidesPerView={4}

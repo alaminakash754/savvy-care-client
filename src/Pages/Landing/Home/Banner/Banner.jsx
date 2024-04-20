@@ -17,16 +17,22 @@ import { Link } from 'react-router-dom';
 const Banner = () => {
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="w-full rounded-lg h-full items-center justify-center bg-slate-200 flex text-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
+            <div className="w-full rounded-lg h-full items-center justify-center bg-slate-200 flex text-center" data-aos="fade-right"
+                data-aos-offset="300"
+                data-aos-easing="ease-in-sine" 
+                data-aos-duration="2000">
 
-               <div>
-               <h1 className='text-6xl font-semibold top-20 text-blue-700 mb-5'>Smile Bright: Your <br /> Premier Dental Destination</h1>
-                <Link to='/doctorsProfile'><button className="bg-purple-100 text-lg text-blue-700 font-medium btn btn-outline border-0 border-t-4 border-b-4 mb-5 w-1/2">Explore More <FaArrowRight></FaArrowRight></button></Link>
-               </div>
+                <div>
+                    <h1 className='text-6xl font-semibold top-20 text-blue-700 mb-5'>Smile Bright: Your <br /> Premier Dental Destination</h1>
+                    <Link to='/doctorsProfile' ><button className="bg-purple-100 text-lg text-blue-700 font-medium btn btn-outline border-0 border-t-4 border-b-4 mb-5 w-1/2" >Explore More <FaArrowRight></FaArrowRight></button></Link>
+                </div>
 
             </div>
-            <div className=" rounded-2xl">
+            <div className=" rounded-2xl" data-aos="fade-left"
+                data-aos-offset="300"
+                data-aos-easing="ease-in-sine" 
+                data-aos-duration="2000" >
                 <Swiper
                     spaceBetween={30}
                     centeredSlides={true}

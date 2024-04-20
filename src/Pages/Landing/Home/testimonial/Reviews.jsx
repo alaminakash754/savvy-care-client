@@ -16,7 +16,7 @@ const Reviews = () => {
                     <img className=" w-12 h-10" src="https://i.ibb.co/zFs18Jw/quote-1.jpg" alt="" />
                 </div>
             </div>
-            <p>This inventory management system has transformed our operations. Its intuitive interface simplifies tracking, ensuring accurate stock levels and timely orders. The customizable features cater perfectly to our needs, streamlining workflows effortlessly. It is boosted our efficiency, making inventory management a breeze. Highly recommend for business optimization.</p>
+            <p className="pb-5">This inventory management system has transformed our operations. Its intuitive interface simplifies tracking, ensuring accurate stock levels and timely orders. The customizable features cater perfectly to our needs, streamlining workflows effortlessly. It is boosted our efficiency, making inventory management a breeze. Highly recommend for business optimization.</p>
            
         </div>
     );

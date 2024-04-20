@@ -100,13 +100,19 @@ const SignUp = () => {
     return (
         <>
             {/* <Helmet><title>Survey Sphere | SignUp</title></Helmet> */}
-            <div className="grid grid-cols-1 md:grid-cols-2 mx-auto items-center justify-center text-center mt-5 bg-yellow-50 p-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 mx-auto items-center justify-center text-center mt-5 bg-blue-50 p-2 gap-5">
 
-                <div>
+                <div data-aos="fade-right"
+                data-aos-offset="300"
+                data-aos-easing="ease-in-sine" 
+                data-aos-duration="2000">
                     <img className="rounded-lg ml-12" src="https://i.ibb.co/XZxNFTb/computer-security-with-login-password-padlock.jpg" alt="" />
                 </div>
-                <div className="items-center mx-auto">
-                    <h2 className="italic text-4xl font-bold text-yellow-800 text-center mb-2">SignUp Here</h2>
+                <div className="items-center mx-auto " data-aos="fade-left"
+                data-aos-offset="300"
+                data-aos-easing="ease-in-sine" 
+                data-aos-duration="2000">
+                    <h2 className="italic text-4xl font-bold text-blue-800 text-center mb-2">SignUp Here</h2>
                     <div className="card shrink-0 w-[400px] shadow-2xl bg-base-100">
                         <form onSubmit={handleSignUp} className="card-body">
                             <div className="form-control">

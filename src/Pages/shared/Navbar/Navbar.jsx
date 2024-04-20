@@ -15,6 +15,7 @@ const NavBar = () => {
     const navLinks = <>
         <li className="text-white font-medium"><Link to='/'>Home</Link></li>
         <li  className="text-white font-medium"><Link to='/doctorsProfile'>Doctors House</Link></li>
+        <li  className="text-white font-medium"><Link to='/appointment'>Make an Appointment</Link></li>
         
         {
             user && isAdmin && <li className="text-white font-medium"><Link to='/dashboard/adminHome'>Dashboard</Link></li>
@@ -28,7 +29,7 @@ const NavBar = () => {
     </>
     return (
         <>
-            <div className="navbar bg-opacity-30 text-purple lg:w-[1150px]  bg-gradient-to-r from-cyan-700 to-blue-900 rounded-xl">
+            <div className="navbar bg-opacity-30 text-purple lg:w-[1150px]  bg-gradient-to-r from-cyan-700 to-blue-900 rounded-xl " data-aos="zoom-in-up" data-aos-duration="2000">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">

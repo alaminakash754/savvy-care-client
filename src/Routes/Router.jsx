@@ -12,6 +12,7 @@ import Dashboard from "../Layout/Dashboard/Dashboard";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import UserHome from "../Pages/Dashboard/userHome/UserHome";
+import Appointment from "../Pages/Appointment/Appointment";
 
 
 
@@ -37,6 +38,11 @@ export const router = createBrowserRouter([
         element: <DoctorsProfile></DoctorsProfile>,
         loader: () => fetch('http://localhost:5000/doctors')
       },
+      {
+        path:'/appointment',
+        element:<Appointment></Appointment>,
+        loader: () => fetch('http://localhost:5000/treatments')
+      }
 
     ]
   },

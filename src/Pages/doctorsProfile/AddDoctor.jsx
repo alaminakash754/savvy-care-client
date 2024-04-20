@@ -51,7 +51,7 @@ const AddDoctor = () => {
                         <span className="label-text">Doctor Name*</span>
 
                     </label>
-                    <input {...register("name", { required: true })} type="text" placeholder="Recipe Name" className="input input-bordered w-full" />
+                    <input {...register("name", { required: true })} type="text" placeholder="Doctor Name" className="input input-bordered w-full" />
 
                 </div>
                 <div className="flex gap-5">
