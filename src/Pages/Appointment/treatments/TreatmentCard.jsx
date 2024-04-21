@@ -1,14 +1,69 @@
-import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { useLocation, useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 
 
 const TreatmentCard = ({ treatment }) => {
-    const { _id, treatment_name,
-        image_url } = treatment;
-    const {user} = useAuth();
-   
-    const { register, handleSubmit, reset } = useForm()
+    const { _id, treatment_name, image_url, treatmentCost } = treatment;
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure()
+
+    const handleAppointment =async (e) => {
+        e.preventDefault();
+        if (user && user.email) {
+            const form = e.target;
+            const name = user?.name;
+            const date = form.date?.value;
+            const email = user?.email;
+            const doctorName = form.select.value;
+            const patientProblem = form.patientProblem?.value;
+            const treatmentDetails = {
+                treatmentId: _id,
+                patientName: name,
+                date,
+                email,
+                doctorName,
+                treatmentCost,
+                patientProblem,
+                treatment_name,
+            }
+            const treatmentResponse = await axiosSecure.post('/appointments', treatmentDetails);
+            console.log(treatmentResponse.data);
+            if (treatmentResponse.data.insertedId) {
+                //  show success popup
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${treatment_name} is added to your Appointment list!`,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                navigate('/appointment')
+
+            }
+        } else {
+            Swal.fire({
+                title: "You are not Logged In",
+                text: "Are you login Now?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, Login Now!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    navigate('/login', { state: { from: location } })
+
+                }
+            });
+        }
+
+    }
     return (
 
         <div className=" bg-blue-50 ">
@@ -23,24 +78,68 @@ const TreatmentCard = ({ treatment }) => {
                     <input type="checkbox" id="my_modal_6" className="modal-toggle" />
                     <div className="modal">
                         <div className="modal-box">
-                            <form className="p-5" >
-                                <h1 className="font-bold text-center text-xl text-blue-500">{treatment_name}</h1>
+                            <form onSubmit={handleAppointment}>
+                                
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Patient Name</span>
+                                    </label>
+                                    <input type="text" name='name' defaultValue={user?.displayName} placeholder="Patient Name" required className="input input-bordered" />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Patient Email</span>
+                                    </label>
+                                    <input type="email" name='email' defaultValue={user?.email} placeholder="Patient Email" required className="input input-bordered" />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Chose a Doctor*</span>
+
+                                    </label>
+                                    <select name="select" className="select select-bordered w-full max-w-xs">
+                                        <option disabled selected>Choose a Doctor</option>
+                                        <option >Dr. Abidur Rahman</option>
+                                        <option>Dr. Zinat Ara</option>
+                                        <option>Dr. Iqbal Mahmud</option>
+                                        <option>Dr. Imamul Haque</option>
+                                    </select>
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Patient Problem</span>
+                                    </label>
+                                    <input type="textarea" name='patientProblem'  placeholder="Patient Problem" required className="input input-bordered" />
+                                </div>
+
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Appointment Date</span>
+                                    </label>
+                                    <input type="date" name='date' required className="input input-bordered" />
+
+                                </div>
+                                <input type="submit" className="btn btn-primary mt-2" value="Confirmed Appointment " />
+
+                            </form>
+                            {/* <form className="p-5" onSubmit={handleSubmit(onSubmit)} >
+                                <h1 {...register("treatmentName", { required: true })} className="font-bold text-center text-xl text-blue-500">{treatment_name}</h1>
                                 <div className="form-control w-full mb-5">
                                     <label className="label">
                                         <span className="label-text">Patient Name*</span>
 
                                     </label>
-                                    <input defaultValue={user?.displayName} {...register("name", { required: true })} type="text"  placeholder="Doctor Name" className="input input-bordered w-full" />
+                                    <input defaultValue={user?.displayName} {...register("name", { required: true })} type="text" placeholder="Doctor Name" className="input input-bordered w-full" />
 
                                 </div>
                                 <div className="flex gap-5">
-                                    {/* category  */}
+                                  
                                     <div className="form-control w-full mb-5">
                                         <label className="label">
                                             <span className="label-text">Chose a Doctor*</span>
 
                                         </label>
-                                        <select defaultValue='default' {...register("category", { required: true })}
+                                        <select defaultValue='default' {...register("doctorName", { required: true })}
                                             className="select select-bordered w-full ">
                                             <option disabled value='default'>Select One</option>
                                             <option value="Cavity Protection">Dr. Abidur Rahman</option>
@@ -51,13 +150,13 @@ const TreatmentCard = ({ treatment }) => {
                                         </select>
 
                                     </div>
-                                    {/* price  */}
+                                
                                     <div className="form-control w-full mb-5">
                                         <label className="label">
                                             <span className="label-text">Patient Email*</span>
 
                                         </label>
-                                        <input defaultValue={user?.email} {...register("email", { required: true })} type="email" placeholder="Doctor Email " className="input input-bordered w-full" />
+                                        <input defaultValue={user?.email} {...register("email", { required: true })} type="email" placeholder="Patient Email " className="input input-bordered w-full" />
 
                                     </div>
                                 </div>
@@ -67,7 +166,7 @@ const TreatmentCard = ({ treatment }) => {
                                         <span className="label-text">Patient Problem</span>
 
                                     </label>
-                                    <textarea {...register('about', { required: true })} className="textarea textarea-bordered h-18" placeholder="What's Your Problem?"></textarea>
+                                    <textarea {...register('patientProblem', { required: true })} className="textarea textarea-bordered h-18" placeholder="What's Your Problem?"></textarea>
 
                                 </div>
                                 <div className="form-control w-full mb-5">
@@ -80,7 +179,7 @@ const TreatmentCard = ({ treatment }) => {
                                 <div className="text-center">
                                     <button className="btn btn-block">Confirmed Appointment </button>
                                 </div>
-                            </form>
+                            </form> */}
                             <div className="modal-action">
                                 <label htmlFor="my_modal_6" className="btn">Close!</label>
                             </div>

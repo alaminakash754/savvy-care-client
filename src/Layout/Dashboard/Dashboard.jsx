@@ -80,7 +80,7 @@ const Dashboard = () => {
                                         </NavLink>
                                     </li>
                                     <li>
-                                        <NavLink to='/dashboard/makeAppointment'>
+                                        <NavLink to='/dashboard/appointment'>
                                             <FaHome></FaHome> Make A New Appointment
                                         </NavLink>
                                     </li>

@@ -28,7 +28,7 @@ const Appointment = () => {
         </div>
         <div>
             <h2 className='text-center text-blue-500 font-semibold text-2xl my-5'>Please Select a Treatment</h2>
-            <div className='grid md:grid-cols-3 sm:grid-cols-1 gap-10'>
+            <div className='grid md:grid-cols-2 sm:grid-cols-1 gap-10'>
             {
                 treatments.map(treatment => <TreatmentCard key={treatment._id} treatment={treatment}></TreatmentCard>)
             }

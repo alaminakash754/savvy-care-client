@@ -66,7 +66,13 @@ export const router = createBrowserRouter([
         path: 'addDoctor',
         element: <PrivateRoute><AddDoctor></AddDoctor></PrivateRoute>
 
+      },
+      {
+        path:'appointment',
+        element:<Appointment></Appointment>,
+        loader: () => fetch('http://localhost:5000/treatments')
       }
+
     ]
   }
 ]);
