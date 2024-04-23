@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useContext, useState } from "react";
@@ -6,11 +6,16 @@ import { AuthContext } from "../../Providers/AuthProviders";
 import { updateProfile } from "firebase/auth";
 import SocialLogin from "../../components/socialLogin/SocialLogin";
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
+
 const SignUp = () => {
     const axiosPublic = useAxiosPublic();
     const [signUpError, setSignUpError] = useState('');
     const [successSignUp, setSuccessSignUp] = useState('')
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     const { createUser, logOut } = useContext(AuthContext);
 
     const handleSignUp = async(e) => {
@@ -88,6 +93,7 @@ const SignUp = () => {
                         console.error(error)
                     });
                 logOut();
+                navigate(from, { replace: true });
                 navigate('/login');
             })
             .catch(error => {
@@ -100,7 +106,7 @@ const SignUp = () => {
     return (
         <>
             {/* <Helmet><title>Survey Sphere | SignUp</title></Helmet> */}
-            <div className="grid grid-cols-1 md:grid-cols-2 mx-auto items-center justify-center text-center mt-5 bg-blue-50 p-2 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 mx-auto items-center justify-center text-center bg-blue-50 p-1 gap-5">
 
                 <div data-aos="fade-right"
                 data-aos-offset="300"
@@ -112,9 +118,10 @@ const SignUp = () => {
                 data-aos-offset="300"
                 data-aos-easing="ease-in-sine" 
                 data-aos-duration="2000">
-                    <h2 className="italic text-4xl font-bold text-blue-800 text-center mb-2">SignUp Here</h2>
+                    
                     <div className="card shrink-0 w-[400px] shadow-2xl bg-base-100">
                         <form onSubmit={handleSignUp} className="card-body">
+                        <h2 className="italic text-2xl font-bold text-blue-800 text-center ">SignUp Here</h2>
                             <div className="form-control">
                                 <label className="label">
                                     <span className="label-text">Name</span>
@@ -125,7 +132,8 @@ const SignUp = () => {
                                 <label className="label">
                                     <span className="label-text">Photo</span>
                                 </label>
-                                <input type="text" name='photo' placeholder="Photo URL" className="input input-bordered" />
+                                {/* <input type="text" name='photo' placeholder="Photo URL" className="input input-bordered" /> */}
+                                <input type="file" name='photo' className="file-input file-input-bordered file-input-md w-full max-w-xs" />
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -140,7 +148,7 @@ const SignUp = () => {
                                 <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                             </div>
                             <div className="form-control mt-2">
-                                <button className="btn btn-primary bg-purple-800">Sign Up</button>
+                                <button className="btn btn-primary bg-blue-800">Sign Up</button>
                             </div>
                         </form>
                         <p>Already have an account? <Link to='/login'><button className="btn btn-link">Login</button></Link></p>

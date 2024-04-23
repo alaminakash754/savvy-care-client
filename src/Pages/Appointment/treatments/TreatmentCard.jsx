@@ -2,15 +2,18 @@ import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAppointment from "../../../Hooks/useAppointment";
 
 
 
 const TreatmentCard = ({ treatment }) => {
-    const { _id, treatment_name, image_url, treatmentCost } = treatment;
+    const { _id, treatmentName , image, treatmentCost } = treatment;
+   
     const navigate = useNavigate();
     const location = useLocation();
     const { user } = useAuth();
-    const axiosSecure = useAxiosSecure()
+    const axiosSecure = useAxiosSecure();
+    const [ , refetch] = useAppointment();
 
     const handleAppointment =async (e) => {
         e.preventDefault();
@@ -21,6 +24,7 @@ const TreatmentCard = ({ treatment }) => {
             const email = user?.email;
             const doctorName = form.select.value;
             const patientProblem = form.patientProblem?.value;
+            console.log(_id);
             const treatmentDetails = {
                 treatmentId: _id,
                 patientName: name,
@@ -29,19 +33,24 @@ const TreatmentCard = ({ treatment }) => {
                 doctorName,
                 treatmentCost,
                 patientProblem,
-                treatment_name,
+                treatmentName,
             }
+            console.log(treatmentName);
             const treatmentResponse = await axiosSecure.post('/appointments', treatmentDetails);
+            
             console.log(treatmentResponse.data);
             if (treatmentResponse.data.insertedId) {
                 //  show success popup
+                // console.log(treatmentDetails.treatment_name, treatment_name) 
                 Swal.fire({
-                    position: "top-end",
+                    position: "center",
                     icon: "success",
-                    title: `${treatment_name} is added to your Appointment list!`,
+                    title: `${treatmentDetails?.treatmentName} is added to your Appointment list!`,
+                    
                     showConfirmButton: false,
                     timer: 1500
                 });
+                refetch();
                 navigate('/appointment')
 
             }
@@ -66,14 +75,19 @@ const TreatmentCard = ({ treatment }) => {
     }
     return (
 
-        <div className=" bg-blue-50 ">
-            <div className="p-2 flex gap-5 text-center mx-auto justify-center" >
+        <div className=" bg-blue-50 rounded-xl flex gap-2  text-center mx-auto justify-center items-center">
+            <div className="p-1 "  data-aos="zoom-in"
+                data-aos-easing="ease-in-sine" 
+                data-aos-duration="1000">
                 <div>
-                    <img className="rounded-t-md rounded-r-md border-4 border-gray-300 p-4 w-[200px] h-[150px]" src={image_url} alt="" />
+                    <img className="rounded-t-md rounded-r-md border-2 border-blue-500 p-2 w-[300px] h-[200px]" src={image} alt="" />
                 </div>
-                <div className="flex items-center justify-center min-h-min text-center">
+                
+
+            </div>
+            <div className=" min-h-min text-center mr-2">
                     {/* The button to open modal */}
-                    <label htmlFor="my_modal_6" className="btn bg-blue-700 text-gray-100">{treatment_name}</label>
+                    <label htmlFor="my_modal_6" className="btn bg-blue-700 text-gray-100">{treatmentName}</label>
                     {/* Put this part before </body> tag */}
                     <input type="checkbox" id="my_modal_6" className="modal-toggle" />
                     <div className="modal">
@@ -88,6 +102,12 @@ const TreatmentCard = ({ treatment }) => {
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
+                                        <span className="label-text">treatment Name</span>
+                                    </label>
+                                    <input type="text" name='name' defaultValue={treatmentName} placeholder="Patient Name" required className="input input-bordered" />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
                                         <span className="label-text">Patient Email</span>
                                     </label>
                                     <input type="email" name='email' defaultValue={user?.email} placeholder="Patient Email" required className="input input-bordered" />
@@ -97,12 +117,12 @@ const TreatmentCard = ({ treatment }) => {
                                         <span className="label-text">Chose a Doctor*</span>
 
                                     </label>
-                                    <select name="select" className="select select-bordered w-full max-w-xs">
-                                        <option disabled selected>Choose a Doctor</option>
-                                        <option >Dr. Abidur Rahman</option>
+                                    <select name="select" defaultValue='default' className="select select-bordered w-full max-w-xs">
+                                        <option disabled value='default'>Choose a Doctor</option>
+                                        <option  >Dr. Abidur Rahman</option>
                                         <option>Dr. Zinat Ara</option>
                                         <option>Dr. Iqbal Mahmud</option>
-                                        <option>Dr. Imamul Haque</option>
+                                        <option >Dr. Imamul Haque</option>
                                     </select>
                                 </div>
                                 <div className="form-control">
@@ -187,8 +207,6 @@ const TreatmentCard = ({ treatment }) => {
                         </div>
                     </div>
                 </div>
-
-            </div>
         </div>
 
 

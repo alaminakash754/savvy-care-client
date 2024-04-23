@@ -24,7 +24,8 @@ const Banner = () => {
                 data-aos-duration="2000">
 
                 <div>
-                    <h1 className='text-6xl font-semibold top-20 text-blue-700 mb-5'>Smile Bright: Your <br /> Premier Dental Destination</h1>
+                    <h1 className='text-6xl font-semibold top-20 text-blue-700 mb-5' data-aos="zoom-in"
+                data-aos-duration="3000">Smile Bright: Your <br /> Premier Dental Destination</h1>
                     <Link to='/doctorsProfile' ><button className="bg-purple-100 text-lg text-blue-700 font-medium btn btn-outline border-0 border-t-4 border-b-4 mb-5 w-1/2" >Explore More <FaArrowRight></FaArrowRight></button></Link>
                 </div>
 

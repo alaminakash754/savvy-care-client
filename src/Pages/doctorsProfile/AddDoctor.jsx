@@ -2,24 +2,31 @@ import { useForm } from "react-hook-form";
 import SectionTitle from "../../components/sectionTitle/SectionTitle";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import { FaUtensils } from "react-icons/fa";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import { FaUserDoctor } from "react-icons/fa6";
 
 
-
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
 const AddDoctor = () => {
     const { register, handleSubmit, reset } = useForm()
     const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     const onSubmit = async (data) => {
-       
 
-        
-            // now send the menu item data to the server with the imagebb
+        const imageFile = { image: data.image[0] }
+        const res = await axiosPublic.post(image_hosting_api, imageFile, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        });
+        if (res.data.success) {
             const addDoctor = {
                 name: data.name,
                 category: data.category,
                 email: data.email,
                 about: data.about,
-                image: data.image
+                image: res.data.data.display_url
             }
             console.log(addDoctor)
             const doctorResponse = await axiosSecure.post('/doctors', addDoctor);
@@ -34,8 +41,12 @@ const AddDoctor = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
-            
+
+            }
         }
+
+
+
         // console.log(res.data)
     };
 
@@ -92,15 +103,15 @@ const AddDoctor = () => {
 
                 </div>
                 <div className="form-control w-full mb-5">
-                        <label className="label">
-                            <span className="label-text">Doctor Image</span>
-                        </label>
-                        <input {...register('image', { required: true })} type="text" name='image' placeholder="Image URL" className="input input-bordered" />
-                    </div>
+                    <label className="label">
+                        <span className="label-text">Doctor Image</span>
+                    </label>
+                    <input {...register('image', { required: true })} type="file" className="file-input w-full max-w-xs" />
+                </div>
 
-               <div className="text-center">
-               <button className="btn btn-block">Add a Doctor <FaUtensils></FaUtensils> </button>
-               </div>
+                <div className="text-center">
+                    <button className="btn btn-block">Add a Doctor <FaUserDoctor></FaUserDoctor> </button>
+                </div>
             </form>
         </div>
     );
