@@ -7,7 +7,7 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AdminHome = () => {
     const axiosSecure = useAxiosSecure()
-    const { data: users = [], refetch } = useQuery({
+    const { data: users = [],  } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             const res = await axiosSecure.get('/users', {

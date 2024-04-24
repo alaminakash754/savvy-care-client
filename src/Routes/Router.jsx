@@ -1,6 +1,4 @@
-import {
-  createBrowserRouter,
-} from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout";
 import Home from "../Pages/Landing/Home/Home";
 import Login from "../Pages/login/Login";
@@ -13,8 +11,7 @@ import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import UserHome from "../Pages/Dashboard/userHome/UserHome";
 import Appointment from "../Pages/Appointment/Appointment";
-
-
+import Payment from "../Pages/Dashboard/userHome/payments/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -22,57 +19,66 @@ export const router = createBrowserRouter([
     element: <MainLayout></MainLayout>,
     children: [
       {
-        path: '/',
-        element: <Home></Home>
+        path: "/",
+        element: <Home></Home>,
       },
       {
-        path: '/login',
-        element: <Login></Login>
+        path: "/login",
+        element: <Login></Login>,
       },
       {
-        path: '/signup',
-        element: <SignUp></SignUp>
+        path: "/signup",
+        element: <SignUp></SignUp>,
       },
       {
-        path: '/doctorsProfile',
+        path: "/doctorsProfile",
         element: <DoctorsProfile></DoctorsProfile>,
-        loader: () => fetch('http://localhost:5000/doctors')
+        loader: () => fetch("http://localhost:5000/doctors"),
       },
       {
-        path:'/appointment',
-        element:<Appointment></Appointment>,
-        loader: () => fetch('http://localhost:5000/treatments')
-      }
-
-    ]
+        path: "/appointment",
+        element: <Appointment></Appointment>,
+        loader: () => fetch("http://localhost:5000/treatments"),
+      },
+    ],
   },
   {
-    path: '/dashboard',
-    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
-        path: 'userHome',
-        element: <UserHome></UserHome>
+        path: "userHome",
+        element: <UserHome></UserHome>,
       },
       {
-        path:'adminHome',
-        element:<AdminHome></AdminHome>
+        path: "payment",
+        element: <Payment></Payment>,
       },
       {
-        path: 'users',
-        element: <AllUsers></AllUsers>
+        path: "adminHome",
+        element: <AdminHome></AdminHome>,
       },
       {
-        path: 'addDoctor',
-        element: <PrivateRoute><AddDoctor></AddDoctor></PrivateRoute>
-
+        path: "users",
+        element: <AllUsers></AllUsers>,
       },
       {
-        path:'appointment',
-        element:<Appointment></Appointment>,
-        loader: () => fetch('http://localhost:5000/treatments')
-      }
-
-    ]
-  }
+        path: "addDoctor",
+        element: (
+          <PrivateRoute>
+            <AddDoctor></AddDoctor>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "appointment",
+        element: <Appointment></Appointment>,
+        loader: () => fetch("http://localhost:5000/treatments"),
+      },
+    ],
+  },
 ]);
