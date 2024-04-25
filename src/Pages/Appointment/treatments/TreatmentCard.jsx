@@ -8,7 +8,7 @@ import { useId } from "react";
 const TreatmentCard = ({ treatment }) => {
   const modalId = useId();
   const { _id, treatmentName, image, treatmentCost } = treatment;
-  console.log(treatment);
+  // console.log(treatment);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -74,7 +74,7 @@ const TreatmentCard = ({ treatment }) => {
     }
   };
   return (
-    <div className=" bg-blue-50 rounded-xl flex gap-2  text-center mx-auto justify-center items-center">
+    <div className=" w-full bg-blue-50 rounded-xl flex gap-2  text-center mx-auto justify-center items-center">
       <div
         className="p-1 "
         data-aos="zoom-in"
@@ -113,19 +113,7 @@ const TreatmentCard = ({ treatment }) => {
                   className="input input-bordered"
                 />
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">treatment Name</span>
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  defaultValue={treatmentName}
-                  placeholder="Patient Name"
-                  required
-                  className="input input-bordered"
-                />
-              </div>
+
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Patient Email</span>

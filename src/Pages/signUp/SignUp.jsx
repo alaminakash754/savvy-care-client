@@ -6,6 +6,9 @@ import { AuthContext } from "../../Providers/AuthProviders";
 import { updateProfile } from "firebase/auth";
 import SocialLogin from "../../components/socialLogin/SocialLogin";
 
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
+
 const SignUp = () => {
   const axiosPublic = useAxiosPublic();
   const [signUpError, setSignUpError] = useState("");
@@ -14,15 +17,19 @@ const SignUp = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const { createUser, logOut } = useContext(AuthContext);
+  const [userPhoto, setUserPhoto] = useState(null);
+
+  const handleImage = (e) => {
+    setUserPhoto(e.target.files[0]);
+  };
 
   const handleSignUp = async (e) => {
     e.preventDefault();
 
     const name = e.target.name.value;
-    const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(name, photo, email, password);
+    // console.log(name, photo, email, password);
     setSignUpError("");
     setSuccessSignUp("");
 
@@ -54,46 +61,52 @@ const SignUp = () => {
 
       return;
     }
-
-    createUser(email, password)
-      .then((result) => {
-        console.log(result.user);
-        updateProfile(result.user, {
-          displayName: name,
-          photoURL: photo,
-        })
-          .then(() => {
-            const userInfo = {
-              name,
-              email,
-            };
-            axiosPublic.post("/users", userInfo).then((res) => {
-              if (res.data.insertedId) {
-                Swal.fire({
-                  position: "top-end",
-                  icon: "success",
-                  title:
-                    "User created successfully & added to mongodb database",
-                  showConfirmButton: false,
-                  timer: 1500,
-                });
-                setSuccessSignUp();
-              }
-            });
-            console.log("Profile Updated");
+    const imageFile = { image: userPhoto };
+    const res = await axiosPublic.post(image_hosting_api, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    if (res.data.success) {
+      createUser(email, password)
+        .then((result) => {
+          console.log(result.user);
+          updateProfile(result.user, {
+            displayName: name,
+            photoURL: res.data.data.url,
           })
-          .catch((error) => {
-            console.error(error);
-          });
-        logOut();
-        navigate(from, { replace: true });
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.error(error);
-        setSignUpError(error.message);
-      });
-    // }
+            .then(() => {
+              const userInfo = {
+                name,
+                email,
+              };
+              axiosPublic.post("/users", userInfo).then((res) => {
+                if (res.data.insertedId) {
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title:
+                      "User created successfully & added to mongodb database",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                  setSuccessSignUp();
+                }
+              });
+              console.log("Profile Updated");
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+          logOut();
+          navigate(from, { replace: true });
+          navigate("/login");
+        })
+        .catch((error) => {
+          console.error(error);
+          setSignUpError(error.message);
+        });
+    }
   };
 
   return (
@@ -140,17 +153,18 @@ const SignUp = () => {
                 <label className="label">
                   <span className="label-text">Photo</span>
                 </label>
-                <input
+                {/* <input
                   type="text"
                   name="photo"
                   placeholder="Photo URL"
                   className="input input-bordered"
-                />
-                {/* <input
+                /> */}
+                <input
+                  onChange={handleImage}
                   type="file"
                   name="photo"
                   className="file-input file-input-bordered file-input-md w-full max-w-xs"
-                /> */}
+                />
               </div>
               <div className="form-control">
                 <label className="label">
