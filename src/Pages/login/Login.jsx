@@ -55,8 +55,8 @@ const Login = () => {
             </Helmet> */}
       <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-10 justify-between">
         <img
-          className="rounded-xl ml-5"
-          src="https://i.ibb.co/tqLXbMR/12953560-Data-security-01.jpg"
+          className="rounded-xl ml-5 h-[600px] w-full"
+          src="https://i.ibb.co/bQmRbbg/login-1.jpg"
           alt=""
           data-aos="fade-right"
           data-aos-offset="300"

@@ -120,8 +120,8 @@ const SignUp = () => {
           data-aos-duration="2000"
         >
           <img
-            className="rounded-lg ml-12"
-            src="https://i.ibb.co/XZxNFTb/computer-security-with-login-password-padlock.jpg"
+            className="rounded-lg ml-12 h-[600px] w-full"
+            src="https://i.ibb.co/YhY51pX/login-2.jpg"
             alt=""
           />
         </div>

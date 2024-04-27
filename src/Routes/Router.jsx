@@ -12,6 +12,8 @@ import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import UserHome from "../Pages/Dashboard/userHome/UserHome";
 import Appointment from "../Pages/Appointment/Appointment";
 import Payment from "../Pages/Dashboard/userHome/payments/Payment";
+import PaymentHistory from "../Pages/Dashboard/userHome/paymentHistory/PaymentHistory";
+import Invoice from "../Pages/Dashboard/userHome/paymentHistory/Invoice";
 
 export const router = createBrowserRouter([
   {
@@ -33,12 +35,12 @@ export const router = createBrowserRouter([
       {
         path: "/doctorsProfile",
         element: <DoctorsProfile></DoctorsProfile>,
-        loader: () => fetch("https://savvy-care-server.vercel.app/doctors"),
+        loader: () => fetch("http://localhost:5000/doctors"),
       },
       {
         path: "/appointment",
         element: <Appointment></Appointment>,
-        loader: () => fetch("https://savvy-care-server.vercel.app/treatments"),
+        loader: () => fetch("http://localhost:5000/treatments"),
       },
     ],
   },
@@ -59,6 +61,14 @@ export const router = createBrowserRouter([
         element: <Payment></Payment>,
       },
       {
+        path: "paymentHistory",
+        element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "invoice",
+        element: <Invoice></Invoice>,
+      },
+      {
         path: "adminHome",
         element: <AdminHome></AdminHome>,
       },
@@ -77,7 +87,7 @@ export const router = createBrowserRouter([
       {
         path: "appointment",
         element: <Appointment></Appointment>,
-        loader: () => fetch("https://savvy-care-server.vercel.app/treatments"),
+        loader: () => fetch("http://localhost:5000/treatments"),
       },
     ],
   },

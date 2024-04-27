@@ -74,7 +74,7 @@ const TreatmentCard = ({ treatment }) => {
     }
   };
   return (
-    <div className=" w-full bg-blue-50 rounded-xl flex gap-2  text-center mx-auto justify-center items-center">
+    <div className=" w-[500px] bg-blue-50 rounded-xl flex gap-2  text-center mx-auto justify-center items-center">
       <div
         className="p-1 "
         data-aos="zoom-in"
@@ -99,7 +99,6 @@ const TreatmentCard = ({ treatment }) => {
         <div className="modal">
           <div className="modal-box">
             <form onSubmit={handleAppointment}>
-              {_id}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Patient Name</span>

@@ -1,6 +1,12 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import Footer from "../../Pages/shared/footer/Footer";
-import { FaHome, FaMoneyBill, FaPlus, FaUsers } from "react-icons/fa";
+import {
+  FaHistory,
+  FaHome,
+  FaMoneyBill,
+  FaPlus,
+  FaUsers,
+} from "react-icons/fa";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import useAuth from "../../Hooks/useAuth";
 import useAdmin from "../../Hooks/useAdmin";
@@ -103,6 +109,11 @@ const Dashboard = () => {
                 <li>
                   <NavLink to="/dashboard/payment">
                     <FaMoneyBill></FaMoneyBill> Payment
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/paymentHistory">
+                    <FaHistory></FaHistory> Payment History
                   </NavLink>
                 </li>
               </>

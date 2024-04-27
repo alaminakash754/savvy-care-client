@@ -15,6 +15,7 @@ const CheckoutForm = () => {
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const [appointment, refetch] = useAppointment();
+  console.log(appointment);
   const { user } = useAuth();
   const totalFees = appointment.reduce(
     (total, treatment) => total + treatment.treatmentCost,
@@ -25,7 +26,7 @@ const CheckoutForm = () => {
       axiosSecure
         .post("/create-payment-intent", { price: totalFees })
         .then((res) => {
-          console.log(res.data.clientSecret);
+          // console.log(res.data.clientSecret);
           setClientSecret(res.data.clientSecret);
         });
     }
@@ -79,6 +80,9 @@ const CheckoutForm = () => {
           appointmentIds: appointment.map((item) => item._id),
           treatmentIds: appointment.map((item) => item.treatmentId),
           status: "pending",
+          doctorName: appointment.map((item) => item.doctorName),
+          patientProblem: appointment.map((item) => item.patientProblem),
+          treatmentName: appointment.map((item) => item.treatmentName),
         };
         const res = await axiosSecure.post("/payments", payment);
         console.log(res.data);
@@ -91,6 +95,7 @@ const CheckoutForm = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate("/dashboard/paymentHistory");
         }
       }
     }

@@ -43,7 +43,7 @@ const UserHome = () => {
               <tr key={appointment._id}>
                 <th>{idx + 1}</th>
                 <td className="text-lg font-semibold">
-                  {appointment.treatment_name}
+                  {appointment.treatmentName}
                 </td>
                 <td className=" font-bold">{appointment.patientProblem}</td>
                 <td className="text-lg font-semibold">
