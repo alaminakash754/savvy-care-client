@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import { FaEye } from "react-icons/fa6";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -26,9 +27,9 @@ const PaymentHistory = () => {
               <th>#</th>
               <th>Treatment Name</th>
               <th>Doctor Name</th>
-              <th>Price</th>
+              <th>Treatment Cost</th>
               <th>Transaction Id</th>
-              <th>Status</th>
+              <th>View Invoice</th>
             </tr>
           </thead>
           <tbody>
@@ -39,18 +40,15 @@ const PaymentHistory = () => {
                 <td>{payment?.treatmentName}</td>
                 <td>{payment.price}</td>
                 <td>{payment.transactionId}</td>
-                <td>{payment.status}</td>
+                <td>
+                  <Link to={`/dashboard/invoice/${payment._id}`}>
+                    <FaEye></FaEye>
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
-      <div className="mt-10">
-        <Link to="/dashboard/invoice">
-          <button className="bg-purple-100 text-lg text-blue-700 font-medium btn btn-outline border-0 border-t-4 border-b-4 mb-5 ">
-            Download Your Invoice
-          </button>
-        </Link>
       </div>
     </div>
   );

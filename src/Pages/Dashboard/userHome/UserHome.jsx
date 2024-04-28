@@ -47,7 +47,7 @@ const UserHome = () => {
                 </td>
                 <td className=" font-bold">{appointment.patientProblem}</td>
                 <td className="text-lg font-semibold">
-                  ${appointment.doctorName}
+                  {appointment.doctorName}
                 </td>
                 <td className="font-semibold">{appointment.date}</td>
                 <td className="font-semibold">{appointment.treatmentCost}</td>
