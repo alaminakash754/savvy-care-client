@@ -116,6 +116,11 @@ const Dashboard = () => {
                     <FaHistory></FaHistory> Payment History
                   </NavLink>
                 </li>
+                <li>
+                  <NavLink to="/dashboard/feedBack">
+                    <FaPlus></FaPlus> Give Your Feedback
+                  </NavLink>
+                </li>
               </>
             )}
             <div className="divider"></div>

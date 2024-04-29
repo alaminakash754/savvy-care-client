@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@onedoc/react-print": "^0.1.131",
+    "@smastrom/react-rating": "^1.5.0",
     "@stripe/react-stripe-js": "^2.7.0",
     "@stripe/stripe-js": "^3.3.0",
     "@tanstack/react-query": "^5.29.2",

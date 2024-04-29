@@ -1,4 +1,3 @@
-import { MdDelete } from "react-icons/md";
 import SectionTitle from "../../../components/sectionTitle/SectionTitle";
 import { FaUsers } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
@@ -64,7 +63,7 @@ const AllUsers = () => {
             <tr>
               <th>Name</th>
               <th>Email</th>
-              <th>User Delete</th>
+
               <th>Role</th>
               <th>Make Doctor</th>
             </tr>
@@ -74,9 +73,7 @@ const AllUsers = () => {
               <tr key={user._id}>
                 <th>{user.name}</th>
                 <td>{user.email}</td>
-                <td>
-                  <MdDelete></MdDelete>
-                </td>
+
                 <td>
                   {user.role === "admin" ? (
                     "Admin"

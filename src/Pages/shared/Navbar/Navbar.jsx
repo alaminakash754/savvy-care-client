@@ -35,7 +35,7 @@ const NavBar = () => {
           <Link to="/dashboard/userHome">Dashboard</Link>
         </li>
       )}
-      {user && isDoctor && (
+      {(user || isDoctor) && !isAdmin && (
         <li className="text-white font-semibold">
           <Link to="/patientAndDoctor">Online Prescription</Link>
         </li>

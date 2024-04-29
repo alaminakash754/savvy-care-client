@@ -15,6 +15,8 @@ import Payment from "../Pages/Dashboard/userHome/payments/Payment";
 import PaymentHistory from "../Pages/Dashboard/userHome/paymentHistory/PaymentHistory";
 import Invoice from "../Pages/Dashboard/userHome/paymentHistory/Invoice";
 import AddPrescription from "../Pages/Dashboard/userHome/addPrescription/AddPrescription";
+import DoctorSuggestion from "../Pages/DoctorSuggestion/DoctorSuggestion";
+import FeedBack from "../Pages/Dashboard/userHome/feedBack/FeedBack";
 
 export const router = createBrowserRouter([
   {
@@ -43,6 +45,15 @@ export const router = createBrowserRouter([
         element: <Appointment></Appointment>,
         loader: () => fetch("http://localhost:5000/treatments"),
       },
+      {
+        path: "/patientAndDoctor",
+        element: (
+          <PrivateRoute>
+            <DoctorSuggestion></DoctorSuggestion>
+          </PrivateRoute>
+        ),
+        loader: () => fetch("http://localhost:5000/prescriptions"),
+      },
     ],
   },
   {
@@ -56,6 +67,10 @@ export const router = createBrowserRouter([
       {
         path: "userHome",
         element: <UserHome></UserHome>,
+      },
+      {
+        path: "feedBack",
+        element: <FeedBack></FeedBack>,
       },
       {
         path: "payment",

@@ -17,6 +17,7 @@ const AddPrescription = () => {
       age: data.age,
       category: data.category,
       about: data.about,
+      email: data.email,
     };
     console.log(addDoctor);
     const doctorResponse = await axiosSecure.post("/prescriptions", addDoctor);
@@ -53,6 +54,18 @@ const AddPrescription = () => {
             {...register("name", { required: true })}
             type="text"
             placeholder="Your Name"
+            className="input input-bordered w-full"
+          />
+        </div>
+        <div className="form-control w-full mb-5">
+          <label className="label">
+            <span className="label-text">Email*</span>
+          </label>
+          <input
+            defaultValue={user?.email}
+            {...register("email", { required: true })}
+            type="email"
+            placeholder="Doctor Email "
             className="input input-bordered w-full"
           />
         </div>
@@ -99,7 +112,7 @@ const AddPrescription = () => {
 
         <div className="text-center">
           <button className="btn btn-block">
-            Submit for Doctor Suggestion <FaNotesMedical></FaNotesMedical>{" "}
+            Submit for Doctors Suggestion <FaNotesMedical></FaNotesMedical>{" "}
           </button>
         </div>
       </form>
