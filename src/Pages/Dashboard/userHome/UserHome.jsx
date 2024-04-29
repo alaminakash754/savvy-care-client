@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import useAppointment from "../../../Hooks/useAppointment";
 import useAuth from "../../../Hooks/useAuth";
+import { GiClick } from "react-icons/gi";
 
 const UserHome = () => {
   const [appointment] = useAppointment();
@@ -25,7 +26,14 @@ const UserHome = () => {
           </span>
         </h1>
       </div>
-      <div className="overflow-x-auto mt-10 bg-blue-50 rounded-lg">
+      <div className="mt-5 text-center">
+        <Link to="/dashboard/addPrescription">
+          <button className="bg-purple-100 text-lg text-blue-700 font-medium btn btn-outline border-0 border-t-4 border-b-4 mb-5">
+            Need a Online Prescription <GiClick></GiClick>
+          </button>
+        </Link>
+      </div>
+      <div className="overflow-x-auto mt-5 bg-blue-50 rounded-lg">
         <table className="table">
           {/* head */}
           <thead>
@@ -62,7 +70,17 @@ const UserHome = () => {
           My Total Treatment Fees:{" "}
           <span className="font-bold text-3xl text-blue-800"> {totalFees}</span>
         </h2>
-
+        {totalFees > 0 ? (
+          <h2 className="font-semibold">
+            Payment Status:{" "}
+            <span className="text-xl font-bold text-blue-600">Due</span>
+          </h2>
+        ) : (
+          <h2 className="font-semibold">
+            Payment Status:{" "}
+            <span className="text-xl font-bold text-blue-600">Paid</span>
+          </h2>
+        )}
         <Link to="/dashboard/payment">
           <button className="btn bg-gradient-to-r from-blue-400 to-blue-900 text-white font-semibold text-lg">
             Go for Payment

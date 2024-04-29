@@ -14,6 +14,7 @@ import Appointment from "../Pages/Appointment/Appointment";
 import Payment from "../Pages/Dashboard/userHome/payments/Payment";
 import PaymentHistory from "../Pages/Dashboard/userHome/paymentHistory/PaymentHistory";
 import Invoice from "../Pages/Dashboard/userHome/paymentHistory/Invoice";
+import AddPrescription from "../Pages/Dashboard/userHome/addPrescription/AddPrescription";
 
 export const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: "paymentHistory",
         element: <PaymentHistory></PaymentHistory>,
+      },
+      {
+        path: "addPrescription",
+        element: <AddPrescription></AddPrescription>,
       },
       {
         path: "invoice/:id",

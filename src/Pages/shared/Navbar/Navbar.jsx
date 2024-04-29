@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Providers/AuthProviders";
 import { useContext } from "react";
 import useAdmin from "../../../Hooks/useAdmin";
+import useDoctor from "../../../Hooks/useDoctor";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isAdmin] = useAdmin();
+  const [isDoctor] = useDoctor();
   const handleLogOut = () => {
     logOut()
       .then(() => {})
@@ -23,14 +25,19 @@ const NavBar = () => {
         <Link to="/appointment">Make an Appointment</Link>
       </li>
 
-      {user && isAdmin && (
+      {user && isAdmin && !isDoctor && (
         <li className="text-white font-medium">
           <Link to="/dashboard/adminHome">Dashboard</Link>
         </li>
       )}
-      {user && !isAdmin && (
+      {user && !isAdmin && !isDoctor && (
         <li className="text-white font-medium">
           <Link to="/dashboard/userHome">Dashboard</Link>
+        </li>
+      )}
+      {user && isDoctor && (
+        <li className="text-white font-semibold">
+          <Link to="/patientAndDoctor">Online Prescription</Link>
         </li>
       )}
     </>

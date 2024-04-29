@@ -42,7 +42,7 @@ const PaymentHistory = () => {
                 <td>{payment.transactionId}</td>
                 <td>
                   <Link to={`/dashboard/invoice/${payment._id}`}>
-                    <FaEye></FaEye>
+                    <FaEye className="text-xl text-blue-500"></FaEye>
                   </Link>
                 </td>
               </tr>

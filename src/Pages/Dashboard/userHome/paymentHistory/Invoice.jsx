@@ -2,6 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 import "../payments/Invoice.css";
+import { useRef } from "react";
+import { useReactToPrint } from "react-to-print";
+import Swal from "sweetalert2";
 
 const Invoice = () => {
   const { user } = useAuth();
@@ -15,7 +18,20 @@ const Invoice = () => {
     },
   });
 
-  // const pdfRef = useRef();
+  const pdfRef = useRef();
+  const handlePdf = useReactToPrint({
+    content: () => pdfRef.current,
+    documentTitle: "invoice",
+    onAfterPrint: () =>
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your Invoice is Ready to Print",
+        showConfirmButton: false,
+        timer: 1500,
+      }),
+  });
+
   // const downloadPDF = () => {
   //   const input = pdfRef.current;
   //   html2canvas(input).then((canvas) => {
@@ -41,12 +57,13 @@ const Invoice = () => {
   // };
 
   return (
-    <div
-      className="invoice-img bg-fixed text-white  mb-5 rounded-xl"
-      ref={pdfRef}
-    >
+    <div className="invoice-img bg-fixed text-white  mb-5 rounded-xl">
       {payments.map((payment, index) => (
-        <div className="text-black   opacity-100 pt-10" key={index}>
+        <div
+          className="text-black   opacity-100 pt-10"
+          ref={pdfRef}
+          key={index}
+        >
           <h1 className="text-center text-3xl font-bold">
             Welcome to <span className="text-blue-600"> Smile Savvy Care</span>
           </h1>
@@ -84,7 +101,7 @@ const Invoice = () => {
         </div>
       ))}
       <div className="items-center justify-center text-center mt-5">
-        <button className="btn btn-primary bg-blue-500">
+        <button onClick={handlePdf} className="btn btn-primary bg-blue-500">
           Download Invoice PDF
         </button>
       </div>

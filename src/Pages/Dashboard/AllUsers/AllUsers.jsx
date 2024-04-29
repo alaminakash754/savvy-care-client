@@ -4,6 +4,7 @@ import { FaUsers } from "react-icons/fa";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { FaUserDoctor } from "react-icons/fa6";
 
 const AllUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -34,7 +35,22 @@ const AllUsers = () => {
       }
     });
   };
-  console.log(users);
+  // console.log(users);
+  const handleMakeDoctor = (user) => {
+    axiosSecure.patch(`/users/doctor/${user._id}`).then((res) => {
+      console.log(res.data);
+      if (res.data.modifiedCount > 0) {
+        refetch();
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: `${user.name} is a Doctor Now!`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
   return (
     <div>
       <SectionTitle subHeading="All Users"></SectionTitle>
@@ -50,7 +66,7 @@ const AllUsers = () => {
               <th>Email</th>
               <th>User Delete</th>
               <th>Role</th>
-              <th>Send Email</th>
+              <th>Make Doctor</th>
             </tr>
           </thead>
           <tbody>
@@ -74,9 +90,16 @@ const AllUsers = () => {
                   )}
                 </td>
                 <td>
-                  <button className="text-blue-600 bg-blue-50 btn btn-sm  border-b-4">
-                    Email
-                  </button>
+                  {user.role === "doctor" ? (
+                    "Doctor"
+                  ) : (
+                    <button
+                      onClick={() => handleMakeDoctor(user)}
+                      className="btn btn-ghost btn-sm text-2xl text-white bg-blue-600"
+                    >
+                      <FaUserDoctor></FaUserDoctor>{" "}
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
