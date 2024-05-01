@@ -17,6 +17,7 @@ import Invoice from "../Pages/Dashboard/userHome/paymentHistory/Invoice";
 import AddPrescription from "../Pages/Dashboard/userHome/addPrescription/AddPrescription";
 import DoctorSuggestion from "../Pages/DoctorSuggestion/DoctorSuggestion";
 import FeedBack from "../Pages/Dashboard/userHome/feedBack/FeedBack";
+import SendEmail from "../Pages/DoctorSuggestion/SendEmail";
 
 export const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: () => fetch("http://localhost:5000/prescriptions"),
+      },
+      {
+        path: "/sendEmail",
+        element: <SendEmail></SendEmail>,
       },
     ],
   },

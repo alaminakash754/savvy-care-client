@@ -75,7 +75,7 @@ const NavBar = () => {
             </ul>
           </div>
           <img
-            className="w-32 h-12 rounded-2xl"
+            className="w-32 h-12 rounded-2xl lg:block hidden"
             src="https://i.ibb.co/ccWYw9W/logo.jpg"
             alt=""
           />

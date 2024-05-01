@@ -52,7 +52,10 @@ const AllUsers = () => {
   };
   return (
     <div>
-      <SectionTitle subHeading="All Users"></SectionTitle>
+      <SectionTitle
+        subHeading="Smile Savvy Care"
+        heading="All Users"
+      ></SectionTitle>
       <div className="my-4">
         <h2>Total Users: {users.length}</h2>
       </div>
