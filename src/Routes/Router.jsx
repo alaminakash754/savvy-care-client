@@ -39,12 +39,12 @@ export const router = createBrowserRouter([
       {
         path: "/doctorsProfile",
         element: <DoctorsProfile></DoctorsProfile>,
-        loader: () => fetch("http://localhost:5000/doctors"),
+        loader: () => fetch("https://savvy-care-server.vercel.app/doctors"),
       },
       {
         path: "/appointment",
         element: <Appointment></Appointment>,
-        loader: () => fetch("http://localhost:5000/treatments"),
+        loader: () => fetch("https://savvy-care-server.vercel.app/treatments"),
       },
       {
         path: "/patientAndDoctor",
@@ -53,7 +53,8 @@ export const router = createBrowserRouter([
             <DoctorSuggestion></DoctorSuggestion>
           </PrivateRoute>
         ),
-        loader: () => fetch("http://localhost:5000/prescriptions"),
+        loader: () =>
+          fetch("https://savvy-care-server.vercel.app/prescriptions"),
       },
       {
         path: "/sendEmail",
@@ -112,7 +113,7 @@ export const router = createBrowserRouter([
       {
         path: "appointment",
         element: <Appointment></Appointment>,
-        loader: () => fetch("http://localhost:5000/treatments"),
+        loader: () => fetch("https://savvy-care-server.vercel.app/treatments"),
       },
     ],
   },
