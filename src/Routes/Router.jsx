@@ -18,6 +18,7 @@ import AddPrescription from "../Pages/Dashboard/userHome/addPrescription/AddPres
 import DoctorSuggestion from "../Pages/DoctorSuggestion/DoctorSuggestion";
 import FeedBack from "../Pages/Dashboard/userHome/feedBack/FeedBack";
 import SendEmail from "../Pages/DoctorSuggestion/SendEmail";
+import Suggestion from "../components/Doctor Suggestion/Suggestion";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/suggestion",
+        element: <Suggestion></Suggestion>,
       },
       {
         path: "/doctorsProfile",

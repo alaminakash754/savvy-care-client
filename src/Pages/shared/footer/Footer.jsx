@@ -33,7 +33,9 @@ const Footer = () => {
         </nav>
         <nav>
           <h6 className="footer-title">Company</h6>
-          <p className="link link-hover">About us</p>
+          <Link to="/suggestion">
+            <p className="link link-hover">Doctors Suggestion</p>
+          </Link>
           <Link to="/patientAndDoctor">
             {" "}
             <p className="link link-hover">Online Prescription</p>

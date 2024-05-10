@@ -18,6 +18,7 @@ const AllUsers = () => {
       return res.data;
     },
   });
+  console.log(users);
 
   const handleMakeAdmin = (user) => {
     axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
@@ -66,6 +67,7 @@ const AllUsers = () => {
             <tr>
               <th>Name</th>
               <th>Email</th>
+              <th>Users Photo</th>
 
               <th>Role</th>
               <th>Make Doctor</th>
@@ -76,6 +78,9 @@ const AllUsers = () => {
               <tr key={user._id}>
                 <th>{user.name}</th>
                 <td>{user.email}</td>
+                <td>
+                  <img className="w-20 h-20 rounded-full" src={user.photoURL} />
+                </td>
 
                 <td>
                   {user.role === "admin" ? (
