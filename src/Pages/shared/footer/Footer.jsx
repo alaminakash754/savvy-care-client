@@ -36,9 +36,13 @@ const Footer = () => {
           <Link to="/suggestion">
             <p className="link link-hover">Doctors Suggestion</p>
           </Link>
+
           <Link to="/patientAndDoctor">
             {" "}
             <p className="link link-hover">Online Prescription</p>
+          </Link>
+          <Link to="/suggestion">
+            <p className="link link-hover">Blog</p>
           </Link>
         </nav>
       </div>
